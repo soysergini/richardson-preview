@@ -11,10 +11,14 @@
   var flip, zoom = 1, panX = 0, panY = 0, lastFocus = null;
 
   // ---- Lazy image loading around the current page ----
+  // Phones get a lighter image set and load fewer pages ahead, to save data.
+  var PHONE = Math.min(window.innerWidth, window.innerHeight) < 600;
+  var AHEAD = PHONE ? 3 : 6;
+  function srcFor(s) { return PHONE && s.indexOf('assets/img/web/') === 0 ? s.replace('assets/img/web/', 'assets/img/mobile/') : s; }
   function ensureImages(n, radius) {
     for (var i = Math.max(1, n - radius); i <= Math.min(TOTAL, n + radius); i++) {
       var imgs = pages[i - 1].querySelectorAll('img[data-src]');
-      for (var k = 0; k < imgs.length; k++) { imgs[k].src = imgs[k].getAttribute('data-src'); imgs[k].removeAttribute('data-src'); }
+      for (var k = 0; k < imgs.length; k++) { imgs[k].src = srcFor(imgs[k].getAttribute('data-src')); imgs[k].removeAttribute('data-src'); }
     }
   }
 
@@ -24,7 +28,7 @@
     return m ? Math.min(TOTAL, Math.max(1, parseInt(m[1], 10))) : 1;
   }
   var start = pageFromHash();
-  ensureImages(start, 4);
+  ensureImages(start, PHONE ? 2 : 4);
 
   // ---- Init flipbook ----
   flip = new St.PageFlip(book, {
@@ -49,7 +53,7 @@
   window.addEventListener('resize', function () { setTimeout(function () { applyScale(); resetZoom(); refresh(); }, 60); });
   flip.on('changeOrientation', function () { setTimeout(function () { applyScale(); refresh(); }, 30); });
   flip.on('flip', function () { refresh(); });
-  flip.on('changeState', function (e) { if (e.data === 'flipping' || e.data === 'user_fold' || e.data === 'fold_corner') ensureImages(cur(), 6); });
+  flip.on('changeState', function (e) { if (e.data === 'flipping' || e.data === 'user_fold' || e.data === 'fold_corner') ensureImages(cur(), AHEAD); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(applyScale);
 
   function cur() { return flip.getCurrentPageIndex() + 1; }
@@ -67,7 +71,7 @@
   var input = $('pageInput');
   function refresh() {
     var v = visible(), n = cur();
-    ensureImages(n, 6);
+    ensureImages(n, AHEAD);
     input.value = v.length > 1 ? v[0] + '-' + v[1] : String(v[0]);
     var last = v[v.length - 1];
     $('progressBar').style.width = (last / TOTAL * 100).toFixed(2) + '%';
@@ -93,7 +97,7 @@
 
   function go(n) {
     n = Math.min(TOTAL, Math.max(1, n));
-    ensureImages(n, 4);
+    ensureImages(n, PHONE ? 2 : 4);
     resetZoom();
     var v = visible();
     if (v.indexOf(n) >= 0) return;
@@ -254,7 +258,7 @@
     var h = '';
     for (var i = 1; i <= TOTAL; i++) {
       var f = ('00' + i).slice(-3);
-      h += '<button data-p="' + i + '" aria-label="Page ' + i + (window.RC_LABELS[i] ? ': ' + window.RC_LABELS[i] : '') + '"><img loading="lazy" src="assets/thumbs/p' + f + '.jpg" alt="">' + i + '</button>';
+      h += '<button data-p="' + i + '" aria-label="Page ' + i + (window.RC_LABELS[i] ? ': ' + window.RC_LABELS[i] : '') + '"><img loading="lazy" src="assets/thumbs/p' + f + '.webp" alt="">' + i + '</button>';
     }
     tg.innerHTML = h;
     markThumb();
