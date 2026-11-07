@@ -1,0 +1,208 @@
+/* ==========================================================================
+   Corporación Richardson, S.A. de C.V. - Corporate Magazine
+   Magazine page design system. All page geometry is authored at A4 @96dpi
+   (794 x 1123 px) and scaled as a unit, so screen and PDF are the same layout.
+   ========================================================================== */
+@font-face{font-family:'Caladea';font-weight:400;font-style:normal;font-display:swap;src:url('../assets/fonts/caladea-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'Caladea';font-weight:400;font-style:italic;font-display:swap;src:url('../assets/fonts/caladea-latin-400-italic.woff2') format('woff2')}
+@font-face{font-family:'Caladea';font-weight:700;font-style:normal;font-display:swap;src:url('../assets/fonts/caladea-latin-700-normal.woff2') format('woff2')}
+@font-face{font-family:'Caladea';font-weight:700;font-style:italic;font-display:swap;src:url('../assets/fonts/caladea-latin-700-italic.woff2') format('woff2')}
+@font-face{font-family:'Carlito';font-weight:400;font-style:normal;font-display:swap;src:url('../assets/fonts/carlito-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'Carlito';font-weight:400;font-style:italic;font-display:swap;src:url('../assets/fonts/carlito-latin-400-italic.woff2') format('woff2')}
+@font-face{font-family:'Carlito';font-weight:700;font-style:normal;font-display:swap;src:url('../assets/fonts/carlito-latin-700-normal.woff2') format('woff2')}
+@font-face{font-family:'Carlito';font-weight:700;font-style:italic;font-display:swap;src:url('../assets/fonts/carlito-latin-700-italic.woff2') format('woff2')}
+
+:root{
+  --navy:#061832;--tech:#20456F;--silver:#8A8E93;--silver-l:#CDCED0;--graphite:#5D656D;--fog:#F2F3F5;--white:#FFFFFF;
+  --display:'Caladea',Cambria,Georgia,serif;--text:'Carlito',Calibri,'Segoe UI',Arial,sans-serif;
+  --mo:72px;   /* outer margin */
+  --mi:64px;   /* inner margin */
+  --b:0px;     /* bleed: 0 on screen, 11.34px (3 mm) in the print-bleed PDF */
+}
+
+/* --- Page ---------------------------------------------------------------- */
+.pg{position:relative;width:794px;height:1123px;overflow:hidden;background:var(--white);color:var(--navy);
+  font:400 14.6px/1.52 var(--text);font-kerning:normal;font-feature-settings:"kern","liga","onum" 0;
+  -webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
+.pg *{box-sizing:border-box}
+.pg h1,.pg h2,.pg h3,.pg h4,.pg p,.pg ul,.pg ol,.pg table,.pg figure,.pg dl,.pg dd{margin:0;padding:0}
+.pg ul,.pg ol{list-style:none}
+.pg a{color:inherit;text-decoration:none}
+.pg.fog{background:var(--fog)}
+.pg.navy{background:var(--navy);color:var(--white)}
+.pg.tech{background:var(--tech);color:var(--white)}
+
+/* Live area. Odd pages sit on the right of the spread: outer margin right. */
+.f{position:absolute;top:92px;bottom:84px;display:flex;flex-direction:column}
+.pg.r .f{left:var(--mi);right:var(--mo)}
+.pg.l .f{left:var(--mo);right:var(--mi)}
+.f.bleed-t{top:0}
+
+/* --- Running elements ---------------------------------------------------- */
+.rh{position:absolute;top:38px;font:700 9.4px/1 var(--text);letter-spacing:.16em;text-transform:uppercase;color:var(--graphite);display:flex;gap:10px;align-items:center;white-space:nowrap}
+.pg.r .rh{right:var(--mo)}.pg.l .rh{left:var(--mo)}
+.rh i{font-style:normal;color:var(--silver)}
+.ft{position:absolute;bottom:34px;display:flex;align-items:baseline;gap:12px;font:400 9.4px/1 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--graphite)}
+.pg.r .ft{right:var(--mo);flex-direction:row}.pg.l .ft{left:var(--mo);flex-direction:row-reverse}
+.ft b{font:400 16px/1 var(--display);letter-spacing:0;color:var(--navy)}
+.pg.navy .rh,.pg.tech .rh,.pg.navy .ft,.pg.tech .ft{color:var(--silver-l)}
+.pg.navy .ft b,.pg.tech .ft b{color:var(--white)}
+.pg.navy .rh i,.pg.tech .rh i{color:var(--silver)}
+.pg.ondark .rh{color:#fff}.pg.ondark .rh i{color:var(--silver-l)}
+
+/* Signature: the sounding gauge. A dip-tape on the fore-edge; every tick is a section,
+   the long tick is where the reader is. It is also a working index. */
+.gg{position:absolute;top:150px;bottom:150px;width:40px;display:flex;flex-direction:column;justify-content:space-between}
+.pg.r .gg{right:0;align-items:flex-end}.pg.l .gg{left:0;align-items:flex-start}
+.gg a{display:flex;align-items:center;height:18px;gap:6px;color:var(--silver)}
+.pg.r .gg a{flex-direction:row-reverse}
+.gg a span{display:block;height:1px;width:11px;background:var(--silver-l)}
+.gg a em{display:none}
+.gg a.on span{height:2px;width:30px;background:var(--navy)}
+.gg a.on em{display:none}
+.pg.navy .gg a span,.pg.tech .gg a span{background:rgba(205,206,208,.42)}
+.pg.navy .gg a.on span,.pg.tech .gg a.on span{background:#fff}
+.pg.ondark .gg a span{background:rgba(255,255,255,.6)}
+.pg.ondark .gg a.on span{background:#fff}
+
+/* --- Type ---------------------------------------------------------------- */
+.ey{font:700 10.4px/1.3 var(--text);letter-spacing:.19em;text-transform:uppercase;color:var(--tech)}
+.pg.navy .ey,.pg.tech .ey,.on-navy .ey{color:var(--silver-l)}
+.d1{font:400 66px/1.03 var(--display);letter-spacing:-.012em}
+.d2{font:400 50px/1.06 var(--display);letter-spacing:-.008em}
+.h1{font:400 38px/1.12 var(--display);letter-spacing:-.005em}
+.h2{font:400 29px/1.17 var(--display)}
+.h3{font:700 18.5px/1.24 var(--display)}
+.h4{font:700 14.6px/1.3 var(--text)}
+.lead{font:400 20px/1.42 var(--display)}
+.lead-s{font:400 17px/1.45 var(--display)}
+.it{font-style:italic}
+.body p+p{margin-top:.8em}
+.sm{font-size:12.6px;line-height:1.46}
+.xs{font-size:11px;line-height:1.42}
+.muted{color:var(--graphite)}
+.pg.navy .muted,.pg.tech .muted,.on-navy .muted{color:var(--silver-l)}
+.cols2{column-count:2;column-gap:28px}
+.cols2>*{break-inside:avoid}
+.num{font:400 1em/1 var(--display);font-feature-settings:"lnum"}
+
+/* Reference-image disclosure: required wherever a website photograph appears. */
+.ref{font:italic 400 10px/1.3 var(--text);color:var(--graphite)}
+.pg.navy .ref,.pg.tech .ref,.on-navy .ref,.ref.lt{color:var(--silver-l)}
+
+.credit{font:400 9.6px/1.42 var(--text);letter-spacing:.01em}
+.credit b{font-weight:700;color:#fff}
+/* Regulatory formula */
+.formula{font:400 10.8px/1.35 var(--text);letter-spacing:.015em;color:var(--graphite);border-top:1px solid var(--silver-l);padding-top:8px}
+.pg.navy .formula,.on-navy .formula,.pg.tech .formula{color:var(--silver-l);border-top-color:rgba(205,206,208,.35)}
+.status{font:400 10.4px/1.3 var(--text);letter-spacing:.03em;color:var(--graphite)}
+.pg.navy .status,.on-navy .status{color:var(--silver-l)}
+
+/* --- Rules --------------------------------------------------------------- */
+.r1{height:1px;background:var(--silver-l);border:0}
+.r2{height:2px;background:var(--navy);border:0;width:44px}
+.pg.navy .r1,.pg.tech .r1,.on-navy .r1{background:rgba(205,206,208,.32)}
+.pg.navy .r2,.pg.tech .r2,.on-navy .r2{background:#fff}
+
+/* --- Imagery ------------------------------------------------------------- */
+.bg{position:absolute;display:block;overflow:hidden;background:var(--navy)}
+.bg img{position:absolute;display:block;max-width:none}
+img.cv{width:100%;height:100%;object-fit:cover}
+.plate{display:block;width:100%;height:auto;background:var(--navy)}
+
+/* Section number, cut by the trim */
+.big{position:absolute;font:400 430px/.78 var(--display);letter-spacing:-.03em;color:var(--tech);font-feature-settings:"lnum";pointer-events:none;user-select:none}
+.big.m{font-size:210px;line-height:.8;letter-spacing:-.02em}
+
+/* --- Strata: full-width horizontal bands ---------------------------------- */
+.st{position:absolute;left:0;right:0}
+.st.c1{background:var(--fog);color:var(--navy)}
+.st.c2{background:var(--silver-l);color:var(--navy)}
+.st.c3{background:var(--graphite);color:#fff}
+.st.c4{background:var(--tech);color:#fff}
+.st.c5{background:var(--navy);color:#fff}
+.pad-l{padding-left:var(--mo);padding-right:var(--mi)}
+.pad-r{padding-left:var(--mi);padding-right:var(--mo)}
+
+/* --- Components ---------------------------------------------------------- */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:26px 28px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:26px 22px}
+.split{display:grid;grid-template-columns:190px 1fr;gap:24px}
+.hair>*{border-top:1px solid var(--silver-l);padding-top:12px}
+.pg.navy .hair>*,.on-navy .hair>*,.pg.tech .hair>*{border-top-color:rgba(205,206,208,.32)}
+
+/* Numbered row: real sequences only */
+.seq{counter-reset:none}
+.seq>li,.seq>div{display:grid;grid-template-columns:66px 1fr;gap:0 12px;border-top:1px solid var(--silver-l);padding:15px 0 16px}
+.seq .n{font:400 30px/1 var(--display);color:var(--tech);font-feature-settings:"lnum"}
+.pg.navy .seq>li,.pg.navy .seq>div,.on-navy .seq>li{border-top-color:rgba(205,206,208,.32)}
+.pg.navy .seq .n,.on-navy .seq .n{color:var(--silver-l)}
+
+/* Data table */
+.tb{width:100%;border-collapse:collapse;font-size:13.4px;line-height:1.38}
+.tb th{font:700 9.8px/1.3 var(--text);letter-spacing:.15em;text-transform:uppercase;text-align:left;padding:0 14px 9px 0;border-bottom:2px solid var(--navy);color:var(--navy)}
+.tb td{padding:10px 14px 10px 0;border-bottom:1px solid var(--silver-l);vertical-align:top}
+.tb td:first-child{font-weight:700;white-space:nowrap}
+.tb.wrap td:first-child{white-space:normal}
+.pg.navy .tb th,.on-navy .tb th{color:#fff;border-bottom-color:#fff}
+.pg.navy .tb td,.on-navy .tb td{border-bottom-color:rgba(205,206,208,.3)}
+
+.tb.tb-l{font-size:16px}.tb.tb-l td{padding:13px 14px 13px 0}
+/* Callout */
+.panel{background:var(--navy);color:#fff;padding:20px 24px}
+.panel.tech{background:var(--tech)}
+.panel.fog{background:var(--fog);color:var(--navy)}
+.panel .ey{color:var(--silver-l)}.panel.fog .ey{color:var(--tech)}
+
+/* Parameter sheet */
+.param{display:grid;grid-template-columns:194px 1fr;gap:0 18px;padding:15px 0 15px;flex:1;align-content:start;border-top:1px solid var(--silver-l)}
+.param .tag{grid-column:1/-1;font:700 9px/1.2 var(--text);letter-spacing:.13em;text-transform:uppercase;color:var(--graphite);margin-bottom:9px}
+.param h3{font:400 25px/1.14 var(--display)}
+.param p{font-size:15px;line-height:1.42}
+.param p+p{margin-top:5px}
+.param b{font-weight:700}
+
+/* Flow chevrons drawn as ruled cells */
+.flow{display:grid;gap:0}
+.flow>div{position:relative;padding:14px 16px 16px 0}
+.flow .n{font:400 13px/1 var(--display);color:var(--silver);display:block;margin-bottom:7px;font-feature-settings:"lnum"}
+
+/* Form directory */
+.fd{font-size:12.6px;line-height:1.3;width:100%;border-collapse:collapse}
+.fd td{padding:5px 8px 5px 0;border-bottom:1px solid var(--silver-l);vertical-align:top}
+.fd td:first-child{width:43%;font-weight:700}
+.fd i{font-weight:400;font-style:italic;color:var(--graphite)}
+.fd td small{display:block;font:italic 400 11.2px/1.28 var(--text);color:var(--graphite);margin-top:1px}
+.fd .opt{color:var(--graphite)}
+.fd .grp td{font:700 9px/1.2 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--tech);padding-top:9px;border-bottom:1px solid var(--navy)}
+
+/* Legal page */
+.lg h2{font:700 16.4px/1.25 var(--display);margin:13px 0 3px;break-after:avoid}
+.lg h2:first-child{margin-top:0}
+.lg p{font-size:14.4px;line-height:1.46;margin-bottom:6px}
+.lg .cols2{column-gap:26px}
+.lg .cols2>*{break-inside:auto}
+.lg .cols2 h2{break-inside:avoid}
+
+/* Link appearance inside running copy */
+a.lk{border-bottom:1px solid currentColor}
+.cta{display:inline-block;font:700 10.4px/1 var(--text);letter-spacing:.19em;text-transform:uppercase;padding:13px 20px;border:1px solid currentColor}
+
+/* Pull-quote */
+.q{font:italic 400 24px/1.32 var(--display)}
+
+/* Vessel class */
+.vs{display:grid;grid-template-columns:96px 1fr;gap:6px 14px;align-items:end;padding:16px 0 14px;border-top:1px solid var(--silver-l)}
+.vs svg{display:block;color:var(--navy)}
+.vs .bar{height:7px;background:var(--tech)}
+
+/* ==========================================================================
+   Print-only build (print.html): one A4 per page, no reader chrome.
+   ========================================================================== */
+@media print{
+  html,body{margin:0;padding:0;background:#fff}
+}
+
+/* Folio over a dark bottom stratum */
+.pg[data-ftw] .ft,.pg[data-ftw] .ft b{color:#fff}
+.pg[data-ftw] .ft span{color:var(--silver-l)}
